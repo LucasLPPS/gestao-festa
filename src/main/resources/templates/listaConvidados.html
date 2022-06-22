@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.thymeleaf.org"
+xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/docs/3.3/../favicon.ico">
+
+    <title>Página Inicial</title>
+
+    <!-- Bootstrap core CSS -->
+    <!-- Última versão CSS compilada e minificada -->
+    <link rel="stylesheet" 
+    th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}" 
+    integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" 
+    crossorigin="anonymous">
+
+    <!-- Tema opcional -->
+    <link rel="stylesheet" 
+    th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css}" 
+    integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" 
+    crossorigin="anonymous">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Spring Project</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <form class="navbar-form navbar-right">
+            <!--
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+            -->
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Festas S.A</h1>
+        <p>Projeto simples para cadastro de convidados.</p>
+        <p><a class="btn btn-primary btn-lg" href="#" role="button" data-toggle="collapse" data-target="#formulario">Cadastrar Convidado &raquo;</a></p>
+          <form id="formulario" class="form-inline collapse" method="POST" 
+          th:object="${convidado}" th:action="@{/convidados}" style="margin: 20px 0">
+            <div class="form-group">
+              <input type="text" class="form-control"
+                placeholder="Nome"
+                th:field="*{nome}"/>
+              <input type="text" class="form-control"
+                placeholder="Acompanhantes"
+                th:field="*{quantidadeAcompanhantes}"/>
+              <button type="submit"
+                class="btn btn-primary">Adicionar</button>
+            </div>
+          </form>
+      </div>
+    </div>
+
+      <br>
+
+      <div class="panel panel-default" style="margin-left: 100px; margin-right: 100px;">
+        <div class="panel-heading">
+          <h1 class="panel-title">Convidados</h1>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Acompanhantes</th>
+                <th>Ação</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="convidado : ${convidados}">
+                <td th:text="${convidado.nome}"></td> 
+                <td th:text="${convidado.quantidadeAcompanhantes}"></td>
+                <td>
+                  <a th:href="@{/excluir(convidadoId=${convidado.id})}" class="btn btn-danger">Excluir</a>
+                </td>
+              </tr> 
+            </tbody> 
+          </table>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer style="text-align: center;">
+        <p>&copy; 2022 LP, Inc.</p>
+      </footer>
+    </div> <!-- /container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js}"></script>
+    <script th:src="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js}" 
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+    crossorigin="anonymous"></script>
+  </body>
+</html>
